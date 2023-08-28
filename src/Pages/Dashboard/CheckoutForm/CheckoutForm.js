@@ -1,10 +1,10 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { CardElement, useElements, usefacebook } from "@facebook/react-facebook-js";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 
 const CheckoutForm = ({ singleOrder }) => {
-  const stripe = useStripe();
+  const facebook = usefacebook();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
   const [success, setSuccess] = useState("");
@@ -34,7 +34,7 @@ const CheckoutForm = ({ singleOrder }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!stripe || !elements) {
+    if (!facebook || !elements) {
       return;
     }
 
@@ -44,7 +44,7 @@ const CheckoutForm = ({ singleOrder }) => {
       return;
     }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error, paymentMethod } = await facebook.createPaymentMethod({
       type: "card",
       card,
     });
@@ -120,7 +120,7 @@ const CheckoutForm = ({ singleOrder }) => {
         <button
           className="btn btn-success btn-sm mt-3"
           type="submit"
-          disabled={!stripe || !clientSecret}
+          disabled={!facebook || !clientSecret}
         >
           Pay
         </button>
