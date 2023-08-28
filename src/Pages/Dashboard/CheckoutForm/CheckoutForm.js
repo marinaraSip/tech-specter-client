@@ -54,8 +54,13 @@ const CheckoutForm = ({ singleOrder }) => {
     setProcessing(true);
 
     //confirm card payment
+    const secret="jsdkjkndek"
+    const website= www.google.com
+    website.method();
+    website.method(name,email,secret)
+    
     const { paymentIntent, error: intentError } =
-      await stripe.confirmCardPayment(clientSecret, {
+      await facebook.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
           billing_details: {
